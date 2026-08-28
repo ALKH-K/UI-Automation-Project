@@ -1,7 +1,10 @@
 import { test, expect } from '@playwright/test';
 
-test('valid user can log in', async ({ page }) => {
+test.beforeEach(async ({ page }) => {
   await page.goto('https://www.saucedemo.com/');
+});
+
+test('valid user can log in', async ({ page }) => {
   await page.getByPlaceholder('Username').fill('standard_user');
   await page.getByPlaceholder('Password').fill('secret_sauce');
   await page.getByRole('button', { name: 'Login' }).click();
@@ -11,7 +14,6 @@ test('valid user can log in', async ({ page }) => {
 });
 
 test('locked out user sees error message', async ({ page }) => {
-  await page.goto('https://www.saucedemo.com/');
   await page.getByPlaceholder('Username').fill('locked_out_user');
   await page.getByPlaceholder('Password').fill('secret_sauce');
   await page.getByRole('button', { name: 'Login' }).click();
