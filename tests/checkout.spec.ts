@@ -15,6 +15,7 @@ test('checkout with a product', async ({ page }) => {
   await page.locator('[data-test="lastName"]').fill('UserLastName');
   await page.locator('[data-test="postalCode"]').fill('111-222');
   await page.locator('[data-test="continue"]').click();
+  await expect(page.locator('[data-test="total-label"]')).toHaveText('Total: $32.39');
   await page.locator('[data-test="finish"]').click();
   await expect(page.locator('[data-test="complete-header"]')).toHaveText('Thank you for your order!');
 
